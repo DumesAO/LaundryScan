@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.SelectCareSymbolsPage"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             Title="Оберіть Символи"
+             x:DataType="local:SelectCareSymbolsVM">
+    <Grid Padding="0,2">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CollectionView ItemsSource="{Binding CareSymbolGroups}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CareSymbolGroup">
+                    <StackLayout Padding="10" Spacing="5">
+                        <HorizontalStackLayout>
+                            <Label Text="{Binding Name}" FontSize="Small" />
+                            <Image Source="arrow_icon.png" HorizontalOptions="Start" WidthRequest="16" HeightRequest="16"/>
+                        </HorizontalStackLayout>
+                        <Rectangle HorizontalOptions="Fill" HeightRequest="3" Fill="LightGray"></Rectangle>
+                        <CollectionView ItemsSource="{Binding CareSymbols}" SelectionMode="Multiple" SelectedItems="{Binding Selection}" ItemsLayout="HorizontalList">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:CareSymbol">
+                                    <StackLayout InputTransparent="True" WidthRequest="148" HorizontalOptions="Center" Padding="10,0,10,20">
+                                        <Frame BackgroundColor="LightGray" Padding="0" CornerRadius="12">
+                                            <Image  Source="{Binding Source}" HeightRequest="96" WidthRequest="96" />
+                                        </Frame>
+                                        <Label Text="{Binding Name}" TextColor="Black" LineBreakMode="WordWrap"  FontSize="Default" HorizontalOptions="Start" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="1" Text="Підтвердити вибір" Margin="30" Command="{Binding SelectSymbolsCommand}"/>
+    </Grid>
+</ContentPage>

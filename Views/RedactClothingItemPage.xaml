@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.RedactClothingItemPage"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             Title="Змінити одяг"
+             x:DataType="local:RedactClothingItemVM">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Label Text="Назва" FontAttributes="Bold" TextColor="Gray" />
+            <Entry Placeholder="ВВедіть назву одягу" Text="{Binding Name}" />
+            <Label Text="Категорія" FontAttributes="Bold" TextColor="Gray" />
+            <Picker ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}" 
+        ItemDisplayBinding="{Binding Name}" />
+            <Label Text="Матеріал" FontAttributes="Bold" TextColor="Gray" />
+            <Picker ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" 
+        ItemDisplayBinding="{Binding Name}" />
+            <Label Text="Символи прання" FontAttributes="Bold" TextColor="Gray" />
+            <CollectionView ItemsSource="{Binding CareSymbols}"
+                        SelectionMode="None"
+                        ItemsLayout="VerticalGrid, 3">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CareSymbol">
+                        <Frame Padding="10"
+                           BorderColor="LightGray"
+                           Margin="5">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding Source}"
+                                   HeightRequest="50"
+                                   WidthRequest="50"
+                                   Aspect="AspectFit"/>
+                                <Label Text="{Binding Name}"
+                                   FontSize="14"
+                                   HorizontalOptions="Center" />
+                                <Button Text="❌"
+                                BackgroundColor="Transparent"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveCareSymbolCommand}"
+                                CommandParameter="{Binding .}"
+                                VerticalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Додати символ"
+                Command="{Binding AddNewLabelCommand}"
+                FontSize="16"/>
+            <Button Text="Зберегти зміни"
+                Command="{Binding UpdateClothCommand}"
+                FontSize="16"
+                TextColor="Black"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="LaundryScan.Views.WardrobePage"
+             x:DataType="local:WardrobeVM"
+             Title="Гардероб">
+    <Grid Padding="0,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Row="0">
+            <HorizontalStackLayout Padding="5">
+                <Label Text="Набори" FontSize="Large" />
+                <Image Source="arrow_icon.png" HorizontalOptions="Start" WidthRequest="16" HeightRequest="16"/>
+            </HorizontalStackLayout>
+            <Rectangle HorizontalOptions="Fill" HeightRequest="5" Fill="Black"></Rectangle>
+            <CollectionView Grid.Row="1" ItemsLayout="VerticalList" 
+                                         ItemsSource="{Binding Outfits}"
+                                         SelectionMode="Single"
+                                         SelectedItem="{Binding SelectedOutfit }">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Outfit">
+                        <Label Padding="10,5" HorizontalOptions="Start" Text="{Binding Name,StringFormat='• {0}'}" TextColor="Black"  FontSize="Medium" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1">
+            <HorizontalStackLayout Padding="5" >
+                <Label Text="Одяг" FontSize="Large" />
+                <Image Source="arrow_icon.png" HorizontalOptions="Start" WidthRequest="16" HeightRequest="16"/>
+            </HorizontalStackLayout>
+            <Rectangle HorizontalOptions="Fill" HeightRequest="5" Fill="Black"></Rectangle>
+        </VerticalStackLayout>
+        <HorizontalStackLayout Padding="10,0" Grid.Row="2" Spacing="10">
+            <Picker Title="Category"
+                    ItemsSource="{Binding Categories}"
+                    SelectedItem="{Binding SelectedCategory}"
+                    ItemDisplayBinding="{Binding Name}"
+                    HorizontalOptions="FillAndExpand"/>
+            <Picker Title="Material"
+                    ItemsSource="{Binding Materials}"
+                    SelectedItem="{Binding SelectedMaterial}"
+                    ItemDisplayBinding="{Binding Name}"
+                    HorizontalOptions="FillAndExpand"/>
+        </HorizontalStackLayout>
+        <CollectionView Grid.Row="3" ItemsLayout="VerticalGrid, 3" 
+                            ItemsSource="{Binding FilteredClothingItems}"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedClothingItem }">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ClothingItem">
+                    <StackLayout Orientation="Vertical"  InputTransparent="True" HorizontalOptions="Start" Padding="10,5">
+                        <Image  Source="{Binding Source}" WidthRequest="96" HeightRequest="96"/>
+                        <Label HorizontalOptions="Start" Text="{Binding Name}" TextColor="Black"  FontSize="Default" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

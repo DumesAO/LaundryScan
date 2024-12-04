@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             x:Class="LaundryScan.Views.SelectNewItemPage"
+             x:DataType="local:SelectNewItemVM"
+             Title="Оберіть одяг">
+    <Grid Padding="0,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout Grid.Row="0" Spacing="10">
+            <Picker Title="Категорія"
+            ItemsSource="{Binding Categories}"
+            SelectedItem="{Binding SelectedCategory}"
+            ItemDisplayBinding="{Binding Name}"
+            HorizontalOptions="FillAndExpand"/>
+            <Picker Title="Матеріал"
+            ItemsSource="{Binding Materials}"
+            SelectedItem="{Binding SelectedMaterial}"
+            ItemDisplayBinding="{Binding Name}"
+            HorizontalOptions="FillAndExpand"/>
+        </HorizontalStackLayout>
+        <CollectionView Grid.Row="1" ItemsLayout="VerticalGrid, 3" ItemsSource="{Binding FilteredClothingItems}" SelectionMode="Single" SelectedItem="{Binding Selection}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:ClothingItem">
+                    <StackLayout Orientation="Vertical"  InputTransparent="True" HorizontalOptions="Start" Padding="10,5">
+                        <Image  Source="{Binding Source}" WidthRequest="96" HeightRequest="96"/>
+                        <Label HorizontalOptions="Start" Text="{Binding Name}" TextColor="Black"  FontSize="Default" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button Grid.Row="2" Text="Підтвердити вибір" Margin="30" Command="{Binding AddItemCommand}"/>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.AddClothPage"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             x:DataType="local:AddClothVM"
+             Title="Створення одягу">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Frame BackgroundColor="SlateGray" Padding="10" CornerRadius="12" HorizontalOptions="Center">
+                <Image Source="{Binding Image}" HeightRequest="150" WidthRequest="150">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding PickImageCommand}" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </Frame>
+            <Label Text="Назва" FontAttributes="Bold" TextColor="Gray" />
+            <Entry Placeholder="Введіть назву одягу" Text="{Binding ClothingItem.Name}" />
+            <Label Text="Категорія" FontAttributes="Bold" TextColor="Gray" />
+            <Picker ItemsSource="{Binding Categories}" SelectedItem="{Binding Category}" 
+                    ItemDisplayBinding="{Binding Name}" />
+            <Label Text="Матеріал" FontAttributes="Bold" TextColor="Gray" />
+            <Picker ItemsSource="{Binding Materials}" SelectedItem="{Binding Material}" 
+                    ItemDisplayBinding="{Binding Name}" />
+            <Label Text="Символи прання" FontAttributes="Bold" TextColor="Gray" />
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Обрати з бібліотеки" Command="{Binding SelectCareSymbolsCommand}" />
+                <Button Text="Відсканувати" Command="{Binding ScanCareSymbolsCommand}" />
+            </HorizontalStackLayout>
+            <CollectionView ItemsSource="{Binding ClothingItem.CareSymbols}" ItemsLayout="HorizontalList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:CareSymbol">
+                        <StackLayout Padding="5">
+                            <Image Source="{Binding Source}" HeightRequest="50" WidthRequest="50" />
+                            <Label Text="{Binding Name}" FontSize="Small" HorizontalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Створити" BackgroundColor="Black" Command="{Binding AddClothCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
+
+    

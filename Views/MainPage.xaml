@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             x:Class="LaundryScan.Views.MainPage"
+             x:DataType="local:MainPageVM">
+
+
+    <StackLayout Padding="10">
+        <StackLayout Spacing="70" HorizontalOptions="Center">
+            <StackLayout></StackLayout>
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Image Source="arrow_icon.png" WidthRequest="24" HeightRequest="24"/>
+                <StackLayout>
+                    <Label Text="Бібліотека символів" FontSize="20"/>
+                    <Label Text="Тлумачення символів прання" FontSize="14" TextColor="{AppThemeBinding Dark=White, Light=Gray}"/>
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoCareCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Image Source="arrow_icon.png" WidthRequest="24" HeightRequest="24"/>
+                <StackLayout>
+                    <Label Text="Сворити одяг" FontSize="20"/>
+                    <Label Text="Додати новий одяг до гардеробу" FontSize="14"/>
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoAddClothCommand}"/>
+                </StackLayout.GestureRecognizers>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Image Source="arrow_icon.png" WidthRequest="24" HeightRequest="24"/>
+                <StackLayout>
+                    <Label Text="Сворити набір" FontSize="20"/>
+                    <Label Text="Додати новий набір одягу до гардеробу" FontSize="14"/>
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoAddOutfitCommand}"/>
+                </StackLayout.GestureRecognizers>
+
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" Spacing="10">
+                <Image Source="arrow_icon.png" WidthRequest="24" HeightRequest="24"/>
+                <StackLayout>
+                    <Label Text="Гардероб" FontSize="20"/>
+                    <Label Text="Список одягу" FontSize="14"/>
+                </StackLayout>
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoWardrobeCommand}"/>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="End">
+
+                <Button ImageSource="scan_icon.png"
+                        HorizontalOptions="Center" 
+                        WidthRequest="100"
+                        BackgroundColor="White" 
+                        Command="{Binding GoCameraCommand}"/>
+                <Label Text="Scan Label" 
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"/>
+            </StackLayout >
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

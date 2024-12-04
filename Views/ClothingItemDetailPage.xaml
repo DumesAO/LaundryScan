@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.ClothingItemDetailPage"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             Title="{Binding ClothingItem.Name}"
+             x:DataType="local:CothingItemDetailVm">
+    <VerticalStackLayout Padding="0,0" HorizontalOptions="FillAndExpand">
+        <HorizontalStackLayout HorizontalOptions="FillAndExpand" Padding="10,0,0,0">
+            <Frame BackgroundColor="LightGray" Padding="0" HeightRequest="150" WidthRequest="150" CornerRadius="12">
+                <Image  Source="{Binding ClothingItem.Source}" HeightRequest="150" WidthRequest="150" />
+            </Frame>
+
+            <VerticalStackLayout HorizontalOptions="FillAndExpand" >
+                <Label Text="{Binding ClothingItem.Name}" Padding="20,0,0,30"  FontSize="Large" TextColor="Black" />
+                <Label Text="{Binding ClothingItem.Category.Name}" Padding="20,0"  FontSize="Medium" TextColor="Black" />
+                <Label Text="{Binding ClothingItem.Material.Name}" Padding="20,0"  FontSize="Medium" TextColor="Black" />
+            </VerticalStackLayout>
+            <ImageButton Source="redact_icon" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Start" Command="{Binding RedactItemCommand}"/>
+            
+        </HorizontalStackLayout>
+        <CollectionView ItemsSource="{Binding ClothingItem.CareSymbols}" ItemsLayout="HorizontalList">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:CareSymbol">
+                    <StackLayout Padding="5">
+                        <Image Source="{Binding Source}" HeightRequest="48" WidthRequest="48" />
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Label Padding="10,20" Text="{Binding ClothingItem.RecommendationText}" FontSize="Medium" TextColor="Black" />
+    </VerticalStackLayout>
+</ContentPage>

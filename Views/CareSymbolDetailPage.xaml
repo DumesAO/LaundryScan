@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.CareSymbolDetailPage"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             x:DataType="models:CareSymbol"
+             Title="{Binding Name}">
+    <VerticalStackLayout Padding="0,0" HorizontalOptions="FillAndExpand">
+        <HorizontalStackLayout  Padding="10,0" >
+            <Frame BackgroundColor="LightGray" Padding="0,0" CornerRadius="12">
+                <Image  Source="{Binding Source}" HeightRequest="150" WidthRequest="150" />
+            </Frame>
+            <Label Padding="10" WidthRequest="230" Text="{Binding Name}" TextColor="Black" LineBreakMode="WordWrap" MaxLines="5"  FontSize="Large" HorizontalOptions="Start" />
+        </HorizontalStackLayout>
+        <Label Padding="10,20" Text="{Binding Description}" FontSize="Medium" TextColor="Gray" />
+    </VerticalStackLayout>
+</ContentPage>

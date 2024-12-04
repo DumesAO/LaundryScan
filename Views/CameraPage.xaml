@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             x:Class="LaundryScan.Views.CameraPage"
+             Title="Сканування"
+             x:DataType="local:CameraVM">
+    <Grid>
+        <toolkit:CameraView x:Name="CameraView"
+                            IsTorchOn="{Binding IsTorchOn}"
+                            MediaCaptured="CameraView_MediaCaptured" 
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand">
+        </toolkit:CameraView>
+        <Grid>
+            <Frame BorderColor="Black"
+                   BackgroundColor="Transparent"
+                   CornerRadius="0"
+                   Margin="50"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"
+                   HeightRequest="300"
+                   WidthRequest="300">
+            </Frame>
+            <Label TextColor="Red" Text="{Binding Predictions}"/>
+        </Grid>
+
+        <Grid BackgroundColor="White" HorizontalOptions="Fill" VerticalOptions="End">
+            <ImageButton Source="arrow_icon" Rotation="180"
+                    Command="{Binding GoBackCommand}"
+                         HorizontalOptions="Start"
+                    WidthRequest="50" HeightRequest="50" />
+            <ImageButton x:Name="PhotoButton"
+                    Source="{Binding button}"
+                    HorizontalOptions="Center"
+                    Clicked="Button_Clicked"
+                    WidthRequest="50" HeightRequest="50"
+                    BackgroundColor="White"/>
+        </Grid>
+    </Grid>
+</ContentPage>

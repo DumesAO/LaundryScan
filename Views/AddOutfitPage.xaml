@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.AddOutfitPage"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             x:DataType="local:AddOutfitVM"
+             Title="Новий набір одягу">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            <Entry x:Name="OutfitNameEntry"
+                   Placeholder="Назва набору"
+                   Text="{Binding Name}"
+                   FontSize="18"/>
+            <Label Text="Елементи одягу"
+                   FontSize="18"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Start" />
+            <CollectionView ItemsSource="{Binding SelectedClothingItems}"
+                            SelectionMode="None"
+                            ItemsLayout="VerticalGrid, 3">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ClothingItem">
+                        <Frame Padding="10"
+                               BorderColor="LightGray"
+                               Margin="5">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding Source}"
+                                       HeightRequest="50"
+                                       WidthRequest="50"
+                                       Aspect="AspectFit"/>
+                                <Label Text="{Binding Name}"
+                                       FontSize="14"
+                                       HorizontalOptions="Center" />
+                                <Button Text="❌"
+                                    BackgroundColor="Transparent"
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.RemoveClothingItemCommand}"
+                                    CommandParameter="{Binding .}"
+                                    VerticalOptions="Center"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="Обрати одяг для набору"
+                    Command="{Binding AddNewItemCommand}"
+                    FontSize="16"/>
+            <Button Text="Створити"
+                    Command="{Binding CreateOutfitCommand}"
+                    FontSize="16"
+                    TextColor="Black"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

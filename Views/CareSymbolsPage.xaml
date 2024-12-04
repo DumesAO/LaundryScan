@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             x:Class="LaundryScan.Views.CareSymbolsPage"
+             Title="Бібліотека символів"
+             x:DataType="local:CareSymbolsVM"
+             BackgroundColor="White">
+    <CollectionView ItemsSource="{Binding CareSymbolGroups}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:CareSymbolGroup">
+                <StackLayout Padding="10" Spacing="5">
+                    <HorizontalStackLayout>
+                        <Label Text="{Binding Name}" FontSize="Small" />
+                        <Image Source="arrow_icon.png" HorizontalOptions="Start" WidthRequest="16" HeightRequest="16"/>
+                    </HorizontalStackLayout>
+                    <Rectangle HorizontalOptions="Fill" HeightRequest="5" Fill="Black"></Rectangle>
+                    <CollectionView ItemsSource="{Binding CareSymbols}" 
+                                    ItemsLayout="HorizontalList"
+                                    SelectionChangedCommand="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDetailsCommand}"
+                                    SelectionMode="Multiple"
+                                    SelectedItems="{Binding Selection}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CareSymbol">
+                                <StackLayout InputTransparent="True" WidthRequest="148" HorizontalOptions="Center" Padding="10,0,10,20">
+                                    <Frame BackgroundColor="LightGray" Padding="0" CornerRadius="12">
+                                        <Image  Source="{Binding Source}" HeightRequest="96" WidthRequest="96" />
+                                    </Frame>
+                                    <Label Text="{Binding Name}" TextColor="Black" LineBreakMode="WordWrap"  FontSize="Default" HorizontalOptions="Start" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

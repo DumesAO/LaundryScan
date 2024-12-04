@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaundryScan.Views.OutfitDetailPage"
+             xmlns:models="clr-namespace:LaundryScan.Models"
+             xmlns:local="clr-namespace:LaundryScan.ViewModels"
+             Title="{Binding Fit.Name}"
+             x:DataType="local:OutfitDetailVM">
+    <ScrollView>
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="Start" WidthRequest="300">
+                <Label Text="{Binding Fit.Name}" Padding="20" HorizontalOptions="Start"  FontSize="Large" TextColor="Black" />
+                <ImageButton Padding="1" Source="redact_icon" HeightRequest="30" WidthRequest="30" HorizontalOptions="Center" Command="{Binding RedactOutfitCommand}"/>
+            </HorizontalStackLayout>
+            <Label Text="Елементи одягу"
+           FontSize="18"
+           FontAttributes="Bold"
+           HorizontalOptions="Start" />
+            <CollectionView ItemsSource="{Binding Fit.ClothingItems}"
+                    SelectionMode="None"
+                    ItemsLayout="VerticalGrid, 3">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ClothingItem">
+                        <Frame Padding="10"
+                       BorderColor="LightGray"
+                       Margin="5">
+                            <VerticalStackLayout>
+                                <Image Source="{Binding Source}"
+                               HeightRequest="50"
+                               WidthRequest="50"
+                               Aspect="AspectFit"/>
+                                <Label Text="{Binding Name}"
+                               FontSize="14"
+                               HorizontalOptions="Center" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Padding="10,20" Text="{Binding Fit.RecomendationText}" FontSize="Medium" TextColor="Black" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

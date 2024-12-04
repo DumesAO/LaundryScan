@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LaundryScan.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LaundryScan.Views"
+    
+    Title="LaundryScan">
+    <ShellContent
+    Title="LaundryScan"
+    ContentTemplate="{DataTemplate local:MainPage}"
+    Route="main" />
+    <ShellContent
+        Title="Care Symbols"
+         ContentTemplate="{DataTemplate local:CareSymbolsPage}"
+        Route="symbols" />
+    <ShellContent
+        Title="Add Cloth"
+        ContentTemplate="{DataTemplate local:AddClothPage}"
+        Route="new_cloth" />
+    <ShellContent
+        Title="Add Outfit"
+        ContentTemplate="{DataTemplate local:AddOutfitPage}"
+        Route="new_outfit" />
+    <ShellContent
+        Title="Wardrobe"
+        ContentTemplate="{DataTemplate local:WardrobePage}"
+        Route="wardrobe" />
+    <ShellContent
+    Title="Symbol Detail"
+    ContentTemplate="{DataTemplate local:CareSymbolDetailPage}"
+    Route="symbol_detail" />
+
+
+</Shell>
