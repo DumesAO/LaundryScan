@@ -59,6 +59,10 @@ namespace LaundryScan.ViewModels
         [RelayCommand]
         private async Task AddNewLabel()
         {
+            ClothiItem.Name = Name;
+            ClothiItem.CategoryID = Category.ID;
+            ClothiItem.MaterialID = Material.ID;
+            ClothiItem.CareSymbols = CareSymbols.ToList();
             await Page.Navigation.PushAsync(new SelectNewLabelPage(ClothiItem));
         }
         [RelayCommand]

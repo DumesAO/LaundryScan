@@ -38,6 +38,8 @@ namespace LaundryScan.ViewModels
         [RelayCommand]
         private async Task AddNewItem()
         {
+            Outfit.Name = Name;
+            Outfit.ClothingItems = ClothingItems.ToList();
             await Page.Navigation.PushAsync(new SelectNewItemPage(Outfit));
         }
         [RelayCommand]

@@ -45,7 +45,7 @@ namespace LaundryScan.ViewModels
         }
         public ObservableCollection<ClothingItem> ClothingItems { get; } = [];
         public ObservableCollection<ClothingItem> FilteredClothingItems { get; } = [];
-        public ClothingItem Selection { get; }
+        [ObservableProperty] private ClothingItem selection;
         public ObservableCollection<Category> Categories { get; } = [];
         public ObservableCollection<Material> Materials { get; } = [];
         private Category _selectedCategory;
@@ -96,6 +96,7 @@ namespace LaundryScan.ViewModels
             if (Outfit.ClothingItems.Contains(Selection)) await Page.Navigation.PushAsync(new RedactOutfitPage(Outfit));
             else
             {
+                Selection=App.Database.GetCareSymbolsForItem(Selection);
                 Outfit.ClothingItems.Add(Selection);
                 await Page.Navigation.PushAsync(new RedactOutfitPage(Outfit));
             }
