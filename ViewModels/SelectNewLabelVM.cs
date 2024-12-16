@@ -42,7 +42,12 @@ namespace LaundryScan.ViewModels
                 }
             }
             if (symbol == null) return;
-            if(ClothingItem.CareSymbols.Contains(symbol)) await Page.Navigation.PushAsync(new RedactClothingItemPage(ClothingItem));
+            var con = false;
+            foreach (CareSymbol careSymbol in ClothingItem.CareSymbols) 
+            {
+                if(careSymbol.ID==symbol.ID) con=true;
+            }
+            if(con) await Page.Navigation.PushAsync(new RedactClothingItemPage(ClothingItem));
             else
             {
                 ClothingItem.CareSymbols.Add(symbol);

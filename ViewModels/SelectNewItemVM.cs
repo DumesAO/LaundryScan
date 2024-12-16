@@ -92,14 +92,18 @@ namespace LaundryScan.ViewModels
         private async Task AddItem()
         {
             if (Selection == null) return;
-
-            if (Outfit.ClothingItems.Contains(Selection)) await Page.Navigation.PushAsync(new RedactOutfitPage(Outfit));
-            else
+            Selection = App.Database.GetCareSymbolsForItem(Selection);
+            var con = false;
+            foreach (ClothingItem item in Outfit.ClothingItems)
             {
-                Selection=App.Database.GetCareSymbolsForItem(Selection);
+                if (item.ID == Selection.ID) con = true;
+            }
+            if (con) await Page.Navigation.PushAsync(new RedactOutfitPage(Outfit));
+            else 
+            { 
                 Outfit.ClothingItems.Add(Selection);
                 await Page.Navigation.PushAsync(new RedactOutfitPage(Outfit));
             }
-        }
+        } 
     }
 }
